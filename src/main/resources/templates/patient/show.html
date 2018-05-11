@@ -1,0 +1,53 @@
+
+<div class="conntent-wrapper container-fluid" layout:decorator="layout" layout:fragment="content">
+    <script type="text/javascript">
+        acivateMenu(".patient");
+    </script>
+
+
+    <h2>List of Patients </h2>
+    <div class="row">
+        <h5>
+            <span>Number of Patients : </span>
+            <span th:text="${data.totalElements}"></span>
+        </h5>
+    </div>
+
+
+    <div class="row">
+        <a class="btn btn-small btn-success" th:href="@{/patient/show-add-edit/0}">Add patient</a>
+    </div>
+    <br/>
+    <div style="overflow-x:scroll;">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <td>name</td>
+                    <td>sex</td>
+                    <td>Birth Date</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="row : ${data.content}">
+                    <td th:text="${row.name}">name</td>
+                    <td th:text="${row.sex}"> sex </td>
+                    <td th:text="${row.birthDate}"> birthDate </td>
+                    <td>
+                        <a class="btn btn-small btn-primary" th:href="@{/patient/show-add-edit/} + ${row.id}">
+                            View and Edit
+                        </a>
+                        <a class="btn btn-small btn-primary" th:href="@{/study/schedule/} + ${row.id}">
+                        Schedule Procedure
+                        </a>
+
+                        <a class="ajax-delete btn btn-small btn-danger" value="" href="#"  th:href="@{/patient/remove/} + ${row.id}">delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- pagination -->
+    <div th:replace="fragments/pagination :: pager(page=${filter.page+1}, pageSize=${filter.size}, count=${data.totalElements})"></div>
+    <!-- pagination -->
+</div>

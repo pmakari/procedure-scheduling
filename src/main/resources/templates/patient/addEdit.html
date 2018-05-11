@@ -1,0 +1,70 @@
+<div class="conntent-wrapper container-fluid" layout:decorator="layout" layout:fragment="content">
+    <script type="text/javascript">
+        acivateMenu(".add");
+    </script>
+    <script type="text/javascript"  th:src="@{/js/ckeditor/ckeditor.js}" src="../../static/js/ckeditor/ckeditor.js"></script>
+    <div class="container panelDiv">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+                <a class="back-link" href="#">Back</a>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Add or Edit Patient
+                    </div>
+                    <div class="panel-body">
+
+                        <form action="#" th:action="@{/patient/save}" th:object="${data}"  method="post">
+                            <div th:object="${data}">
+                                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+                                    <strong>Warning</strong>OOPS!!Wrong entries
+                                    <p></p>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors()}" th:text="${err}">Input is incorrect</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <input name="id" type="hidden" th:field="*{id}" />
+                                    <label class="col-sm-6 control-label col-md-3" for="name">Name</label>
+                                    <input class="col-sm-6 col-md-5 form-control" id="name" type="text" th:field="*{name}" />
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="sex">Sex</label>
+                                    <select name="sex" id="sex">
+                                        <option th:value="*{sex}" th:selected="*{sex}">Select Sex</option>
+                                        <option>FEMALE</option>
+                                        <option>MALE</option>
+                                    </select>
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Error</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="birthDate">Birth Date</label>
+                                    <input class="col-sm-6 col-md-5 form-control" name="birthDate" id="birthDate" type="text" th:field="*{birthDate}" />
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Error</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-6">
+                                        <button  type="submit" class="btn btn-info  btn-lg">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+-- To be used by Flyway for data migration and database versioning

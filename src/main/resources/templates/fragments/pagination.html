@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+    </head>
+
+    <body>
+        <ul th:if="${page != null}" th:fragment="pager (page, pageSize, count)" class="pagination table-pagination" th:with="page1=${(((page-1)/3)*3)+1},page2=${(((page-1)/3)*3)+2},page3=${(((page-1)/3)*3)+3}">
+            <li th:unless="${page == 1}">
+                <span>
+                    <button   class="btn btn-xs"
+                              value="1" style="background:none;border:none">&#060;&#060;</button>
+                </span>
+            </li>
+            <li th:unless="${page le 1}">
+                <span>
+                    <button   class="btn btn-xs"
+                              value="#" th:value="${page-1}" style="background:none;border:none">&#060;</button>
+                </span>
+            </li>
+            <th:block th:unless="${(((page1-1)*pageSize) ge count)  or (page eq 1 and count le pageSize) }" th:classappend="(${page} == ${page1})? 'active'">
+                <li th:unless="${(((page1-1)*pageSize) ge count)  or (page eq 1 and count le pageSize) }" th:classappend="(${page} == ${page1})? 'active'">
+                    <span>
+                        <button   class="btn btn-xs"
+                                  value="1" th:value="${page1}" th:text="${page1}" style="background:none;border:none">1
+                        </button>
+                    </span>
+                </li>
+                <li th:unless="${((page2-1)*pageSize) ge count}" th:classappend="(${page} == ${page2})? 'active'">
+                    <span>
+                        <button   class="btn btn-xs"
+                                  value="2" th:value="${page2}" th:text="${page2}" style="background:none;border:none">2
+                        </button>
+                    </span>
+                </li>
+                <li th:unless="${((page3-1)*pageSize) ge count}" th:classappend="(${page} == ${page3})? 'active'">
+                    <span>
+                        <button   class="btn btn-xs"
+                                  value="3" th:value="${page3}" th:text="${page3}" style="background:none;border:none">3
+                        </button>
+                    </span>
+                </li>
+                <li th:unless="${page ge (count/pageSize)}">
+                    <span>
+                        <button   class="btn btn-xs"
+                                  value="#" th:value="${page+1}" style="background:none;border:none">&#062;</button>
+                    </span>
+                </li>
+                <li th:unless="${page eq T(Math).ceil((1.0*count)/pageSize)}">
+                    <span>
+                        <button   class="btn btn-xs"
+                                  value="#" th:value="${#numbers.formatInteger(T(Math).ceil((1.0*count)/pageSize),0)}" style="background:none;border:none">
+                            &#062;&#062;</button>
+                    </span>
+                </li>
+            </th:block>
+        </ul>
+    </body>
+
+</html>
