@@ -30,4 +30,8 @@ public class PatientEntity extends BaseEntity {
     @Column(name = "birth_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
+
+    public PatientEntity(Long id) {
+        this.setId(id);
+    }
 }

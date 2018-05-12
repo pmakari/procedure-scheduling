@@ -9,7 +9,7 @@
                 <a class="back-link" href="#">Back</a>
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        Add or Edit Patient
+                        Add or Edit Procedure
                     </div>
                     <div class="panel-body">
 
@@ -35,15 +35,16 @@
 
                             <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-6 control-label col-md-3" for="sex">Sex</label>
-                                    <select name="sex" id="sex">
-                                        <option th:value="*{sex}" th:selected="*{sex}">Select Sex</option>
+                                    <label class="col-sm-6 control-label col-md-3" for="sex">Gender</label>
+                                    <select class="col-sm-6 col-md-5 form-control" name="sex" id="sex">
+                                        <option th:value="*{sex}" th:selected="*{sex}">Select Gender</option>
                                         <option>FEMALE</option>
                                         <option>MALE</option>
                                     </select>
                                     <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Error</label>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="form-group">
                                     <label class="col-sm-6 control-label col-md-3" for="birthDate">Birth Date</label>
@@ -55,7 +56,7 @@
 
                             <div class="row">
                                 <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-6">
+                                    <div class="col-sm-offset-3 col-sm-12">
                                         <button  type="submit" class="btn btn-info  btn-lg">Save</button>
                                     </div>
                                 </div>

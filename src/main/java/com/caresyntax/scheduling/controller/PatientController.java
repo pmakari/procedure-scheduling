@@ -43,7 +43,6 @@ public class PatientController {
     @RequestMapping(value = "/show-add-edit/{id}", method = RequestMethod.GET)
     public ModelAndView showAddOrEdit(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "id") Long id
     ) {
-        System.out.println("idddddddddd"+id);
         Map<String, Object> map = new HashMap<>();
         PatientResponseDTO responseDTO;
         if (id == 0) {
@@ -51,7 +50,6 @@ public class PatientController {
         } else {
             responseDTO = patientService.findById(id);
         }
-//        System.out.println(responseDTO.toString());
         map.put("data", responseDTO);
         ModelAndView modelAndView = new ModelAndView("patient/addEdit", map);
         return modelAndView;
@@ -62,7 +60,6 @@ public class PatientController {
                        @Valid @ModelAttribute(value = "data") PatientRequestDTO requestDTO, BindingResult bindingResult, Model model
     )
     {
-        System.out.println(requestDTO.toString());
         patientService.save(requestDTO);
         model.addAttribute("data", requestDTO);
         return "redirect:/patient/show";

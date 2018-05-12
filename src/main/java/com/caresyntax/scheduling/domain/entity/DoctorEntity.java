@@ -21,4 +21,7 @@ public class DoctorEntity extends BaseEntity{
     @Column(nullable = false, length = 128)
     private String name;
 
+    public DoctorEntity(Long id) {
+        this.setId(id);
+    }
 }

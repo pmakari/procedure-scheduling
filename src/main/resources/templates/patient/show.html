@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     <td>name</td>
-                    <td>sex</td>
+                    <td>Gender</td>
                     <td>Birth Date</td>
                     <td>Actions</td>
                 </tr>
@@ -31,17 +31,16 @@
             <tbody>
                 <tr th:each="row : ${data.content}">
                     <td th:text="${row.name}">name</td>
-                    <td th:text="${row.sex}"> sex </td>
+                    <td th:text="${row.sex}"> Gender </td>
                     <td th:text="${row.birthDate}"> birthDate </td>
                     <td>
                         <a class="btn btn-small btn-primary" th:href="@{/patient/show-add-edit/} + ${row.id}">
                             View and Edit
                         </a>
-                        <a class="btn btn-small btn-primary" th:href="@{/study/schedule/} + ${row.id}">
+                        <a class="btn btn-small btn-primary" th:href="@{/study/show-add-edit/} + ${row.id}">
                         Schedule Procedure
                         </a>
-
-                        <a class="ajax-delete btn btn-small btn-danger" value="" href="#"  th:href="@{/patient/remove/} + ${row.id}">delete</a>
+                        <!--<a class="ajax-delete btn btn-small btn-danger" value="" href="#"  th:href="@{/patient/remove/} + ${row.id}">delete</a>-->
                     </td>
                 </tr>
             </tbody>

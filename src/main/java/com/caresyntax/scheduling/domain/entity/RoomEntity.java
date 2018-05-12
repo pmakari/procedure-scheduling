@@ -22,4 +22,7 @@ public class RoomEntity extends BaseEntity{
     @Column(nullable = false, length = 128)
     private String name;
 
+    public RoomEntity(Long id){
+        this.setId(id);
+    }
 }
