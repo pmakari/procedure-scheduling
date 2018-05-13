@@ -1,0 +1,84 @@
+<div class="conntent-wrapper container-fluid" layout:decorator="layout" layout:fragment="content">
+    <script type="text/javascript">
+        acivateMenu(".add");
+    </script>
+    <script type="text/javascript"  th:src="@{/js/ckeditor/ckeditor.js}" src="../../static/js/ckeditor/ckeditor.js"></script>
+    <div class="container panelDiv">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Schedule treatment procedure for <strong th:text="${data.patientName}"></strong>
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" th:action="@{/study/save}" th:object="${data}"  method="post">
+                            <div th:object="${data}">
+                                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+                                    <strong>Warning</strong>OOPS!!Wrong entries
+                                    <p></p>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors()}" th:text="${err}">Input is incorrect</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <input name="id" type="hidden" th:field="*{patientId}" />
+                                    <label class="col-sm-6 control-label col-md-3" for="description">Description</label>
+                                    <input class="col-sm-6 col-md-5 form-control" id="description" type="text" th:field="*{description}" />
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="startTime">Start Time</label>
+                                    <input class="col-sm-6 col-md-5 form-control" name="startTime" id="startTime" type="text" th:field="*{startTime}" />
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Error</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="endTime">End Time</label>
+                                    <input class="col-sm-6 col-md-5 form-control" name="endTime" id="endTime" type="text" th:field="*{endTime}" />
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Error</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="doctors">Doctor</label>
+                                    <select class="col-sm-6 col-md-5 form-control" name="doctors" id="doctors">
+                                        <option>Select</option>
+                                        <option th:each="n : *{doctors}" th:value="${n.id}" th:text="${n.name}"/>
+                                    </select>
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('doctors')}" th:errors="*{doctors}">Error</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-6 control-label col-md-3" for="rooms">Room</label>
+                                    <select class="col-sm-6 col-md-5 form-control" name="rooms" id="rooms">
+                                        <option>Select</option>
+                                        <option th:each="n : *{rooms}" th:value="${n.id}" th:text="${n.name}"/>
+                                    </select>
+                                    <label class="col-sm-6 control-label  col-md-4" th:if="${#fields.hasErrors('rooms')}" th:errors="*{rooms}">Error</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-6">
+                                        <button  type="submit" class="btn btn-info  btn-lg">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

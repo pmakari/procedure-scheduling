@@ -11,6 +11,6 @@ public class WelcomeController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "redirect:/patient/show";
     }
 }

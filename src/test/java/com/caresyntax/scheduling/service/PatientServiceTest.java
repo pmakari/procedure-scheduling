@@ -27,4 +27,6 @@ public class PatientServiceTest extends BaseTest {
         Assert.assertEquals(expectedResponse.getName(), patientRequestDTO.getName());
         Assert.assertNotNull(expectedResponse.getName());
     }
+
+
 }

@@ -28,7 +28,7 @@ public class PatientServiceImpl implements PatientService {
     @Transactional
     public void save(PatientRequestDTO requestDTO) {
         PatientEntity patientEntity = PatientEntity.builder().name(requestDTO.getName()).sex(requestDTO.getSex()).birthDate(requestDTO.getBirthDate()).build();
-        if (requestDTO.getId()!=null && requestDTO.getId()!=0){
+        if (requestDTO.getId() != null && requestDTO.getId() != 0) {
             patientEntity.setId(requestDTO.getId());
         }
         try {
@@ -62,11 +62,17 @@ public class PatientServiceImpl implements PatientService {
         }
 
     }
+
     @Transactional
     @Override
     public PatientResponseDTO findById(Long id) {
-        PatientEntity entity=patientRepository.findOne(id);
-        PatientResponseDTO responseDTO=PatientResponseDTO.builder().id(entity.getId()).name(entity.getName()).sex(entity.getSex()).birthDate(entity.getBirthDate()).build();
-        return responseDTO;
+        try {
+            PatientEntity entity = patientRepository.findOne(id);
+            PatientResponseDTO responseDTO = PatientResponseDTO.builder().id(entity.getId()).name(entity.getName()).sex(entity.getSex()).birthDate(entity.getBirthDate()).build();
+            return responseDTO;
+        } catch (DataAccessException ex) {
+            throw new BusinessException(ex.getMessage(), ex.getCause());
+
+        }
     }
 }

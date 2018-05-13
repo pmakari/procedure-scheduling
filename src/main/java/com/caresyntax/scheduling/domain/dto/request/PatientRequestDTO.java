@@ -23,7 +23,6 @@ public class PatientRequestDTO extends BaseRequestDTO{
     private String name;
     private Long id;
     private Sex sex;
-    @DateTimeFormat()
     private Date birthDate;
 
 }

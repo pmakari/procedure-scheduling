@@ -1,5 +1,6 @@
 package com.caresyntax.scheduling.controller;
 
+import com.caresyntax.scheduling.aspect.CheckBindingResult;
 import com.caresyntax.scheduling.domain.dto.request.PageRequestDTO;
 import com.caresyntax.scheduling.domain.dto.request.PatientRequestDTO;
 import com.caresyntax.scheduling.domain.dto.response.PatientResponseDTO;
@@ -36,7 +37,6 @@ public class PatientController {
     public String showPatients(@Validated PageRequestDTO requestDTO, BindingResult bindingResult, Model model) {
         Page<PatientEntity> page = patientService.findAll(requestDTO);
         model.addAttribute("data", page);
-        model.addAttribute("filter", requestDTO);
         return "patient/show";
     }
 
@@ -54,14 +54,13 @@ public class PatientController {
         ModelAndView modelAndView = new ModelAndView("patient/addEdit", map);
         return modelAndView;
     }
-
+    @CheckBindingResult
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(HttpServletRequest request, HttpServletResponse response,
                        @Valid @ModelAttribute(value = "data") PatientRequestDTO requestDTO, BindingResult bindingResult, Model model
     )
     {
         patientService.save(requestDTO);
-        model.addAttribute("data", requestDTO);
         return "redirect:/patient/show";
     }
 
